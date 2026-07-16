@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صندوق الاقتراحات - فريقنا</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="main-container">
+        <header>
+            <div class="header-logo">
+                <img src="شفاف%20%20قنديل.png" alt="شعار قنديل" class="logo-img">
+            </div>
+            <h1>صنـدوق اقتراحـات قنديـل 🕯️</h1>
+            <p>رأيكم يهمنا لنرتقي معًـا، أرسلوا أفكاركم وسأطلع عليها شخصيًا</p>
+        </header>
+
+        <section class="form-section">
+            <form id="suggestionForm">
+                <div class="input-group">
+                    <label for="name">اسمك الكريم:</label>
+                    <input type="text" id="name" name="name" placeholder="مثال: حسنـاء" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="suggestion">اقتراحك أو فكرتك المتميزة:</label>
+                    <textarea id="suggestion" name="suggestion" placeholder="اكتب اقتراحك هنا..." required></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn">إرسـال الاقتـراح ✨</button>
+            </form>
+
+            <div id="messageStatus" class="status-message"></div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const suggestionForm = document.getElementById('suggestionForm');
+
+            if (suggestionForm) {
+                suggestionForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const nameInput = document.getElementById('name').value;
+                    const suggestionInput = document.getElementById('suggestion').value;
+                    const messageStatus = document.getElementById('messageStatus');
+
+                    messageStatus.textContent = "جاري إرسال اقتراحك المتميز .. ✨";
+                    messageStatus.style.color = "#333";
+                    messageStatus.style.display = "block";
+
+                    console.log("محاولة إرسال الطلب إلى السيرفر عبر المسار النسبي...");
+
+                    // هنا الحل السحري: استخدام مسار نسبي ليتوافق تلقائياً مع أي منفذ يعمل فيه السيرفر
+                    fetch('/submit-suggestion', {
+                        method: 'POST',
+                        mode: 'cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: nameInput,
+                            suggestion: suggestionInput
+                        })
+                    })
+                    .then(response => {
+                        console.log("تم استلام رد من السيرفر:", response);
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("البيانات المستلمة:", data);
+                        if (data.status === 'success') {
+                            messageStatus.textContent = "تم إرسال اقتراحك بنجاح! شكراً لكِ. 📥";
+                            messageStatus.style.color = "#2A5647";
+                            suggestionForm.reset();
+                        } else {
+                            messageStatus.textContent = "عذراً، حدثت مشكلة أثناء الإرسال. ❌";
+                            messageStatus.style.color = "red";
+                        }
+                    })
+                    .catch(error => {
+                        console.error('حدث خطأ أثناء الاتصال:', error);
+                        messageStatus.textContent = "لم يتم الاتصال بالسيرفر. تأكدي أن ملف البايثون يعمل! 🔌";
+                        messageStatus.style.color = "red";
+                    });
+                });
+            } else {
+                console.error('لم يتم العثور على النموذج في الصفحة!');
+            }
+        });
+    </script>
+</body>
+</html>
