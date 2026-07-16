@@ -83,6 +83,6 @@ def open_browser():
 
 
 if __name__ == '__main__':
-    # تشغيل الدالة لفتح المتصفح بعد ثانية واحدة من إقلاع السيرفر
+    # تأكدي من إيقاف الـ reloader وفتح الـ host لجميع الأجهزة
     Timer(1.2, open_browser).start()
-    app.run(debug=True, port=8000, use_reloader=False)
+    app.run(host='0.0.0.0', debug=True, port=8000, use_reloader=False)
