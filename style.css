@@ -214,76 +214,35 @@ button[type="submit"]:active {
         font-size: 0.95rem;
     }
 }
+/* 1. تحديث تنسيق الـ html والـ body لفتح السكرول */
+html, body {
+    min-height: 100%; /* غيرناها من height إلى min-height */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* السماح بالنزول عمودياً عند الحاجة */
+}
 
-/* تنسيقات الفوتر المحدثة لضبط مكانه وعرضه الكامل */
+/* 2. تحديث تنسيق الحاوية الرئيسية */
+.main-container {
+    flex: 1; /* تجعل الحاوية تأخذ المساحة المتاحة وتدفع الفوتر للأسفل */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 15px; /* مسافة علوية وسفلية مريحة لتنفس العناصر */
+    box-sizing: border-box;
+}
+
+/* 3. تحديث الفوتر ليأخذ مكانه الطبيعي بدون حظر الشاشة */
 footer {
-    width: 100vw; /* أهم سطر: اجعله يمتد بكامل عرض شاشة المتصفح */
-    background-color: #163626; /* اللون الأخضر الغامق */
-    border-top: 3px solid #bfa37a; /* الخط الذهبي في الأعلى */
-    padding: 30px 0;
+    width: 100%; /* استبدال 100vw بـ 100% لتجنب شريط التمرير الأفقي الزائد */
+    background-color: #163626;
+    border-top: 3px solid #bfa37a;
+    padding: 25px 0;
     color: #ffffff;
     font-family: 'Tajawal', sans-serif;
-    
-    /* لضمان أنه يلتصق بأسفل الصفحة إذا كان محتوى النموذج قصيراً */
-    margin-top: auto;
-}
-
-/* تنسيق الحاوية الداخلية للفوتر لتوّسيط العناصر عمودياً وأفقياً */
-.footer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px; /* مسافة بين سطر الأيقونات وسطر الحقوق */
-    text-align: center;
-    max-width: 100%; /* لضمان عدم خروجها عن عرض الفوتر */
-    padding: 0 15px; /* مسافة جانبية على الشاشات الصغيرة */
-}
-
-/* سطر الأيقونات الاجتماعي */
-.footer-socials {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px; /* المسافة بين كل أيقونة وأخرى */
-    flex-wrap: wrap; /* لترتيبها على سطرين إذا ضاقت الشاشة */
-}
-
-/* تنسيق الروابط والأيقونات */
-.footer-icon-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 22px; /* حجم الأيقونات الافتراضية */
-    display: inline-flex;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-/* تنسيق زر "انضم للقروب العام" الكبسولة المحدد مثل الصورة */
-.footer-socials .join-icon {
-    border: 1px solid rgba(255, 255, 255, 0.35); /* إطار نحيف */
-    border-radius: 30px; /* حواف دائرية بالكامل */
-    padding: 6px 16px; /* مسافة داخلية لتكبير الكبسولة */
-    font-size: 15px; /* حجم خط النص داخل الزر */
-    gap: 8px; /* مسافة بين الأيقونة والنص داخل الزر */
-    background-color: transparent; /* خلفية شفافة ليتطابق مع الصورة */
-}
-
-/* ضبط حجم الأيقونة داخل زر الانضمام */
-.join-icon i {
-    font-size: 15px;
-}
-
-/* نص الحقوق المحفوظة بالأسفل */
-.footer-rights p {
-    margin: 0;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8); /* لون أبيض خفيف وناعم */
-}
-
-/* لضمان أن الفوتر يلتصق بأسفل الصفحة */
-html, body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    margin-top: auto; /* يدفع الفوتر للقاع دائماً حتى لو كانت الصفحة طويلة */
+    flex-shrink: 0; /* يمنع انضغاط أو صغر حجم الفوتر */
 }
