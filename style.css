@@ -214,35 +214,48 @@ button[type="submit"]:active {
         font-size: 0.95rem;
     }
 }
-/* 1. تحديث تنسيق الـ html والـ body لفتح السكرول */
+
+/* 1. إعادة الـ html والـ body لوضعهما الطبيعي بدون قيود Flex للقاع */
 html, body {
-    min-height: 100%; /* غيرناها من height إلى min-height */
+    height: auto; /* حذف الـ height: 100% أو min-height */
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto; /* السماح بالنزول عمودياً عند الحاجة */
+    display: block; /* العودة للوضع العادي بدل Flex الأب */
+    overflow-y: auto; /* السماح بالنزول عمودياً بشكل طبيعي */
+    background-color: #f8f9fa; /* لون خلفية الصفحة (اختياري، يطابق الكارد) */
 }
 
-/* 2. تحديث تنسيق الحاوية الرئيسية */
+/* 2. تنسيق الحاوية الرئيسية لتكون موّسطة ولها مسافة بالأسفل */
 .main-container {
-    flex: 1; /* تجعل الحاوية تأخذ المساحة المتاحة وتدفع الفوتر للأسفل */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 15px; /* مسافة علوية وسفلية مريحة لتنفس العناصر */
+    padding: 60px 15px; /* مسافة علوية سفلية لتوسيط الكارد */
+    min-height: 100vh; /* تجعل الكارد يتوسط الشاشة في البداية */
     box-sizing: border-box;
 }
 
-/* 3. تحديث الفوتر ليأخذ مكانه الطبيعي بدون حظر الشاشة */
+/* 3. تنسيق الفوتر ليظهر طبيعياً في قاع الصفحة بعد النزول */
 footer {
-    width: 100%; /* استبدال 100vw بـ 100% لتجنب شريط التمرير الأفقي الزائد */
+    display: block; /* حذف الـ flex-shrink والحوسة السابقة */
+    width: 100%; /* بكامل العرض */
     background-color: #163626;
     border-top: 3px solid #bfa37a;
-    padding: 25px 0;
+    padding: 30px 0;
     color: #ffffff;
     font-family: 'Tajawal', sans-serif;
-    margin-top: auto; /* يدفع الفوتر للقاع دائماً حتى لو كانت الصفحة طويلة */
-    flex-shrink: 0; /* يمنع انضغاط أو صغر حجم الفوتر */
+    margin-top: 0; /* حذف الـ margin-top: auto */
+    position: relative; /* لضمان ظهوره بشكل صحيح في المسار العادي */
 }
+
+/* باقي تنسيقات الفوتر الداخلية تبقى كما هي (الأيقونات، الزر الكبسولة، الحقوق) */
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-align: center;
+}
+/* ... الخ (باقي كود CSS الفوتر المعتمد سابقاً للأيقونات والزر الكبسولة) */
