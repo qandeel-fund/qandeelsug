@@ -86,7 +86,7 @@
                 Promise.all([telegramPromise, excelPromise])
                 .then(([teleRes, excelRes]) => {
                     if (teleRes.ok) {
-                        messageStatus.textContent = "تم إرسال اقتراحك بنجاح وحفظه في الإكسل! 📥📊";
+                        messageStatus.textContent = "تم إرسال اقتراحك بنجاح ! 📥";
                         messageStatus.style.color = "#2A5647"; 
                         suggestionForm.reset(); 
                     } else {
