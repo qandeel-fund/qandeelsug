@@ -33,7 +33,7 @@
                     <textarea id="suggestion" name="suggestion" placeholder="اكتب اقتراحك هنا..." required></textarea>
                 </div>
 
-                <button type="submit" id="submitBtn">إرسـال الاقتـراح ✨</button>
+                <button type="submit" id="submitBtn">إرسـال الاقتـراح </button>
             </form>
 
             <div id="messageStatus" class="status-message"></div>
@@ -54,7 +54,7 @@
                     const messageStatus = document.getElementById('messageStatus');
 
                     // إظهار رسالة التنبيه المبدئية لحين اكتمال الإرسال
-                    messageStatus.textContent = "جاري إرسال اقتراحك المتميز .. ✨";
+                    messageStatus.textContent = "جاري إرسال اقتراحك المتميز .. ";
                     messageStatus.style.color = "#333";
                     messageStatus.style.display = "block";
 
@@ -80,7 +80,7 @@
                     .then(response => {
                         if (response.ok) {
                             // تغيير حالة الرسالة للنجاح باللون الأخضر وتفريغ الحقول
-                            messageStatus.textContent = "تم إرسال اقتراحك بنجاح ووصل للمبرمج! 📥";
+                            messageStatus.textContent = "تم إرسال اقتراحك بنجاح ، شكـرًا ! 📥";
                             messageStatus.style.color = "#2A5647"; 
                             suggestionForm.reset(); 
                         } else {
