@@ -215,22 +215,29 @@ button[type="submit"]:active {
     }
 }
 
-/* تنسيق الفوتر الأساسي والخلفية */
+/* تنسيقات الفوتر المحدثة لضبط مكانه وعرضه الكامل */
 footer {
-    background-color: #163626; /* اللون الأخضر الغامق الخاص بهوية قنديل */
-    border-top: 3px solid #bfa37a; /* الخط الذهبي الأنيق في الأعلى */
-    padding: 25px 0;
+    width: 100vw; /* أهم سطر: اجعله يمتد بكامل عرض شاشة المتصفح */
+    background-color: #163626; /* اللون الأخضر الغامق */
+    border-top: 3px solid #bfa37a; /* الخط الذهبي في الأعلى */
+    padding: 30px 0;
     color: #ffffff;
     font-family: 'Tajawal', sans-serif;
+    
+    /* لضمان أنه يلتصق بأسفل الصفحة إذا كان محتوى النموذج قصيراً */
+    margin-top: auto;
 }
 
-/* الحاوية الرئيسية لترتيب العناصر عمودياً */
+/* تنسيق الحاوية الداخلية للفوتر لتوّسيط العناصر عمودياً وأفقياً */
 .footer-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 15px; /* المسافة بين سطر الأيقونات وسطر الحقوق */
+    gap: 15px; /* مسافة بين سطر الأيقونات وسطر الحقوق */
+    text-align: center;
+    max-width: 100%; /* لضمان عدم خروجها عن عرض الفوتر */
+    padding: 0 15px; /* مسافة جانبية على الشاشات الصغيرة */
 }
 
 /* سطر الأيقونات الاجتماعي */
@@ -238,10 +245,11 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px; /* المسافة بين كل أيقونة والأخرى */
+    gap: 20px; /* المسافة بين كل أيقونة وأخرى */
+    flex-wrap: wrap; /* لترتيبها على سطرين إذا ضاقت الشاشة */
 }
 
-/* تنسيق روابط الأيقونات الافتراضي */
+/* تنسيق الروابط والأيقونات */
 .footer-icon-link {
     color: #ffffff;
     text-decoration: none;
@@ -251,18 +259,14 @@ footer {
     transition: all 0.3s ease;
 }
 
-.footer-icon-link:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-}
-
-/* تنسيق زر "انضم للقروب العام" ليصبح كبسولة محددة مثل الصورة */
+/* تنسيق زر "انضم للقروب العام" الكبسولة المحدد مثل الصورة */
 .footer-socials .join-icon {
-    border: 1px solid rgba(255, 255, 255, 0.35); /* إطار نحيف شفاف قليلاً */
-    border-radius: 30px; /* جعل الحواف دائرية بالكامل */
+    border: 1px solid rgba(255, 255, 255, 0.35); /* إطار نحيف */
+    border-radius: 30px; /* حواف دائرية بالكامل */
     padding: 6px 16px; /* مسافة داخلية لتكبير الكبسولة */
     font-size: 15px; /* حجم خط النص داخل الزر */
     gap: 8px; /* مسافة بين الأيقونة والنص داخل الزر */
+    background-color: transparent; /* خلفية شفافة ليتطابق مع الصورة */
 }
 
 /* ضبط حجم الأيقونة داخل زر الانضمام */
@@ -275,5 +279,11 @@ footer {
     margin: 0;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.8); /* لون أبيض خفيف وناعم */
-    letter-spacing: 0.5px;
+}
+
+/* لضمان أن الفوتر يلتصق بأسفل الصفحة */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
