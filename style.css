@@ -215,60 +215,210 @@ button[type="submit"]:active {
     }
 }
 
+/* =======================================================
+   10. تنسيقات صفحة الاقتراحات المضافة حديثاً لقنديل
+   ======================================================= */
+.suggestions-section {
+    padding: 40px 0 80px 0;
+}
 
-footer {
-    background-color: #1b3a30;
-    color: var(--white);
-    padding: 25px 0;
+.suggestions-container {
+    max-width: 750px; /* جعل العرض ملموم ومريح للعين */
+    margin: 0 auto;
+}
+
+.suggestion-box {
+    background-color: var(--white);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+    border-top: 5px solid var(--primary-color); /* السقف بالأخضر الداكن الفخم لفئة الرواد */
+}
+
+.suggestion-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: right;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.form-group label i {
+    color: var(--accent-color); /* الأيقونات الصغيرة بالذهبي */
+    margin-left: 5px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e3eae5;
+    background-color: var(--light-bg);
+    border-radius: 10px;
+    font-size: 0.95rem;
     font-weight: 600;
-    font-size: 0.9rem;
-    border-top: 3px solid var(--accent-color);
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-color);
+    transition: var(--transition);
+    outline: none;
+}
+
+/* تأثير التفاعل والتركيز مع الحقول */
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    border-color: var(--accent-color);
+    background-color: var(--white);
+    box-shadow: 0 0 8px rgba(212, 179, 114, 0.15);
+}
+
+/* =======================================================
+   11. تنسيقات الفوتر المطور (المعتم والمتجاوب)
+   ======================================================= */
+footer {
+    background-color: #1b3a30; /* الأخضر المعتم المعتمد لهوية قنديل */
+    padding: 30px 0;
+    margin-top: auto; /* لضمان بقاء الفوتر أسفل الصفحة دائماً */
+    direction: rtl;
 }
 
 .footer-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    text-align: center;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* صف أيقونات التواصل الاجتماعي */
 .footer-socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap; /* للسماح بنزول الأزرار في الشاشات الصغيرة جداً دون تشويه */
+}
+
+/* التنسيق العام للأيقونات الدائرية */
+.footer-icon-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-}
-
-.footer-icon-link {
-    color: var(--white);
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 1.3rem;
     text-decoration: none;
-    font-size: 1.4rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: var(--transition);
-}
-
-.footer-icon-link.join-icon {
-    font-size: 0.9rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 6px 15px;
-    border-radius: 20px;
-    border: 1px solid rgba(212, 179, 114, 0.4);
+    transition: all 0.3s ease;
 }
 
 .footer-icon-link:hover {
-    color: var(--accent-color);
-    transform: translateY(-2px);
+    background-color: var(--accent-color); /* التحويم يقلب بالذهبي الدافئ لقنديل */
+    color: #1b3a30;
+    transform: translateY(-3px);
 }
 
-.footer-icon-link.join-icon:hover {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
+/* تنسيق خاص ومميز لزر "انضم للقروب العام" ليكون ملموماً وبارزاً */
+.footer-socials .join-icon {
+    width: auto;
+    padding: 0 18px;
+    border-radius: 30px;
+    gap: 8px;
+}
+
+.footer-socials .join-icon .icon-text {
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+}
+
+/* حقوق النشر */
+.footer-rights {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    padding-top: 15px;
 }
 
 .footer-rights p {
-    opacity: 0.7;
+    color: rgba(255, 255, 255, 0.6);
     font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* =======================================================
+   12. التجاوب الكامل للفوتر على شاشات الجوال والآيفون
+   ======================================================= */
+@media (max-width: 480px) {
+    footer {
+        padding: 20px 0;
+    }
+    
+    .footer-container {
+        gap: 15px;
+    }
+
+    .footer-socials {
+        gap: 12px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .footer-icon-link {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    /* مواءمة زر الانضمام للقروب على الجوال حتى لا يخرج عن الإطار */
+    .footer-socials .join-icon {
+        padding: 0 12px;
+        height: 38px;
+    }
+
+    .footer-socials .join-icon .icon-text {
+        font-size: 0.78rem;
+    }
+
+    .footer-rights p {
+        font-size: 0.75rem;
+    }
+}
+
+/* شاشات الجوال المخصصة للاقتراحات */
+@media (max-width: 440px) {
+    .suggestions-section {
+        padding: 20px 0 50px 0;
+    }
+    .suggestion-box {
+        padding: 25px 15px;
+        margin: 0 5px;
+    }
+    .form-group label {
+        font-size: 0.88rem;
+    }
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+        font-size: 0.88rem;
+        padding: 10px 12px;
+    }
 }
