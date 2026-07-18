@@ -214,3 +214,66 @@ button[type="submit"]:active {
         font-size: 0.95rem;
     }
 }
+
+/* تنسيق الفوتر الأساسي والخلفية */
+footer {
+    background-color: #163626; /* اللون الأخضر الغامق الخاص بهوية قنديل */
+    border-top: 3px solid #bfa37a; /* الخط الذهبي الأنيق في الأعلى */
+    padding: 25px 0;
+    color: #ffffff;
+    font-family: 'Tajawal', sans-serif;
+}
+
+/* الحاوية الرئيسية لترتيب العناصر عمودياً */
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* المسافة بين سطر الأيقونات وسطر الحقوق */
+}
+
+/* سطر الأيقونات الاجتماعي */
+.footer-socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* المسافة بين كل أيقونة والأخرى */
+}
+
+/* تنسيق روابط الأيقونات الافتراضي */
+.footer-icon-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 22px; /* حجم الأيقونات الافتراضية */
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.footer-icon-link:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* تنسيق زر "انضم للقروب العام" ليصبح كبسولة محددة مثل الصورة */
+.footer-socials .join-icon {
+    border: 1px solid rgba(255, 255, 255, 0.35); /* إطار نحيف شفاف قليلاً */
+    border-radius: 30px; /* جعل الحواف دائرية بالكامل */
+    padding: 6px 16px; /* مسافة داخلية لتكبير الكبسولة */
+    font-size: 15px; /* حجم خط النص داخل الزر */
+    gap: 8px; /* مسافة بين الأيقونة والنص داخل الزر */
+}
+
+/* ضبط حجم الأيقونة داخل زر الانضمام */
+.join-icon i {
+    font-size: 15px;
+}
+
+/* نص الحقوق المحفوظة بالأسفل */
+.footer-rights p {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8); /* لون أبيض خفيف وناعم */
+    letter-spacing: 0.5px;
+}
