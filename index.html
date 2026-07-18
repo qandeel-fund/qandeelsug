@@ -14,6 +14,7 @@
     <div class="main-container">
         <header>
             <div class="header-logo">
+                <!-- تأكدي أن اسم الصورة متطابق تماماً مع الملف المرفوع في جيت هوب -->
                 <img src="شفاف%20%20قنديل.png" alt="شعار قنديل" class="logo-img">
             </div>
             <h1>صنـدوق اقتراحـات قنديـل 🕯️</h1>
@@ -39,63 +40,59 @@
         </section>
     </div>
 
+    <!-- كود الجافا سكريبت الذكي للإرسال المباشر بدون بايثون -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const suggestionForm = document.getElementById('suggestionForm');
 
             if (suggestionForm) {
                 suggestionForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
+                    e.preventDefault(); 
 
                     const nameInput = document.getElementById('name').value;
                     const suggestionInput = document.getElementById('suggestion').value;
                     const messageStatus = document.getElementById('messageStatus');
 
+                    // إظهار رسالة التنبيه المبدئية لحين اكتمال الإرسال
                     messageStatus.textContent = "جاري إرسال اقتراحك المتميز .. ✨";
                     messageStatus.style.color = "#333";
                     messageStatus.style.display = "block";
 
-                    console.log("محاولة إرسال الطلب إلى السيرفر عبر المسار النسبي...");
+                    // بيانات البوت الخاصة بكِ للربط المباشر
+                    const token = "8451586120:AAEEaShsVb1GvLeyVNsTJ77bYsipM6IBbkk";
+                    const chatId = "1999709827";
+                    
+                    // تنسيق نص الرسالة التي ستصلكِ على تليجرام
+                    const text = `📥 **وصلك اقتراح جديد من الجوال!**\n\n👤 **المرسل:** ${nameInput}\n💡 **المحتوى:**\n${suggestionInput}`;
 
-                    // هنا الحل السحري: استخدام مسار نسبي ليتوافق تلقائياً مع أي منفذ يعمل فيه السيرفر
-                    // استبدلي هذا السطر برقم الـ IP الخاص بجهازكِ الذي استخرجناه (172.20.10.11)
-                    fetch('http://172.20.10.11:8000/submit-suggestion', {
+                    // إرسال الطلب مباشرة إلى سيرفر تليجرام الرسمي
+                    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
                         method: 'POST',
-                        mode: 'cors',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            name: nameInput,
-                            suggestion: suggestionInput
+                            chat_id: chatId,
+                            text: text,
+                            parse_mode: 'Markdown'
                         })
                     })
                     .then(response => {
-                        console.log("تم استلام رد من السيرفر:", response);
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log("البيانات المستلمة:", data);
-                        if (data.status === 'success') {
-                            messageStatus.textContent = "تم إرسال اقتراحك بنجاح! شكراً لكِ. 📥";
-                            messageStatus.style.color = "#2A5647";
-                            suggestionForm.reset();
+                        if (response.ok) {
+                            // تغيير حالة الرسالة للنجاح باللون الأخضر وتفريغ الحقول
+                            messageStatus.textContent = "تم إرسال اقتراحك بنجاح ووصل للمبرمج! 📥";
+                            messageStatus.style.color = "#2A5647"; 
+                            suggestionForm.reset(); 
                         } else {
-                            messageStatus.textContent = "عذراً، حدثت مشكلة أثناء الإرسال. ❌";
-                            messageStatus.style.color = "red";
+                            throw new Error('فشل في استجابة السيرفر');
                         }
                     })
                     .catch(error => {
-                        console.error('حدث خطأ أثناء الاتصال:', error);
-                        messageStatus.textContent = "لم يتم الاتصال بالسيرفر. تأكدي أن ملف البايثون يعمل! 🔌";
+                        console.error('حدث خطأ أثناء الاتصال المباشر:', error);
+                        messageStatus.textContent = "عذراً، حدثت مشكلة أثناء الإرسال. ❌";
                         messageStatus.style.color = "red";
                     });
                 });
-            } else {
-                console.error('لم يتم العثور على النموذج في الصفحة!');
             }
         });
     </script>
