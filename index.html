@@ -41,61 +41,67 @@
     </div>
 
     <!-- كود الجافا سكريبت الذكي للإرسال المباشر بدون بايثون -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const suggestionForm = document.getElementById('suggestionForm');
+    <!-- كود الجافا سكريبت المحدث والجاهز للتشغيل المباشر -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const suggestionForm = document.getElementById('suggestionForm');
 
-            if (suggestionForm) {
-                suggestionForm.addEventListener('submit', function(e) {
-                    e.preventDefault(); 
+        if (suggestionForm) {
+            suggestionForm.addEventListener('submit', function(e) {
+                e.preventDefault(); 
 
-                    const nameInput = document.getElementById('name').value;
-                    const suggestionInput = document.getElementById('suggestion').value;
-                    const messageStatus = document.getElementById('messageStatus');
+                const nameInput = document.getElementById('name').value;
+                const suggestionInput = document.getElementById('suggestion').value;
+                const messageStatus = document.getElementById('messageStatus');
 
-                    // إظهار رسالة التنبيه المبدئية لحين اكتمال الإرسال
-                    messageStatus.textContent = "جاري إرسال اقتراحك المتميز .. ";
-                    messageStatus.style.color = "#333";
-                    messageStatus.style.display = "block";
+                messageStatus.textContent = "جاري إرسال اقتراحك المتميز .. ✨";
+                messageStatus.style.color = "#333";
+                messageStatus.style.display = "block";
 
-                    // بيانات البوت الخاصة بكِ للربط المباشر
-                    const token = "8451586120:AAEEaShsVb1GvLeyVNsTJ77bYsipM6IBbkk";
-                    const chatId = "1999709827";
-                    
-                    // تنسيق نص الرسالة التي ستصلكِ على تليجرام
-                    const text = `📥 **وصلك اقتراح جديد من الجوال!**\n\n👤 **المرسل:** ${nameInput}\n💡 **المحتوى:**\n${suggestionInput}`;
+                // 1️⃣ إرسال البيانات المباشر إلى تليجرام
+                const token = "8451586120:AAEEaShsVb1GvLeyVNsTJ77bYsipM6IBbkk";
+                const chatId = "1999709827";
+                const text = `📥 **وصلك اقتراح جديد من الجوال!**\n\n👤 **المرسل:** ${nameInput}\n💡 **المحتوى:**\n${suggestionInput}`;
 
-                    // إرسال الطلب مباشرة إلى سيرفر تليجرام الرسمي
-                    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            chat_id: chatId,
-                            text: text,
-                            parse_mode: 'Markdown'
-                        })
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            // تغيير حالة الرسالة للنجاح باللون الأخضر وتفريغ الحقول
-                            messageStatus.textContent = "تم إرسال اقتراحك بنجاح ، شكـرًا ! 📥";
-                            messageStatus.style.color = "#2A5647"; 
-                            suggestionForm.reset(); 
-                        } else {
-                            throw new Error('فشل في استجابة السيرفر');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('حدث خطأ أثناء الاتصال المباشر:', error);
-                        messageStatus.textContent = "عذراً، حدثت مشكلة أثناء الإرسال. ❌";
-                        messageStatus.style.color = "red";
-                    });
+                const telegramPromise = fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown' })
                 });
-            }
-        });
-    </script>
+
+                // 2️⃣ إرسال البيانات إلى جدول إكسل أونلاين الخاص بكِ عبر SheetMonkey
+                const sheetMonkeyURL = "https://api.sheetmonkey.io/form/7jgJLekCh26Qazdn34NjBs";
+                
+                const excelPromise = fetch(sheetMonkeyURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        "التاريخ والوقت": new Date().toLocaleString('ar-EG'),
+                        "اسم المرسل": nameInput,
+                        "الاقتراح": suggestionInput
+                    })
+                });
+
+                // 3️⃣ التحقق من نجاح العمليتين معاً وتحديث الـ UI
+                Promise.all([telegramPromise, excelPromise])
+                .then(([teleRes, excelRes]) => {
+                    if (teleRes.ok) {
+                        messageStatus.textContent = "تم إرسال اقتراحك بنجاح وحفظه في الإكسل! 📥📊";
+                        messageStatus.style.color = "#2A5647"; 
+                        suggestionForm.reset(); 
+                    } else {
+                        throw new Error('فشل في الإرسال');
+                    }
+                })
+                .catch(error => {
+                    console.error('خطأ:', error);
+                    messageStatus.textContent = "عذراً، حدثت مشكلة أثناء الإرسال. ❌";
+                    messageStatus.style.color = "red";
+                });
+            });
+        }
+    });
+</script>
 
     <footer>
     <div class="container footer-container">
