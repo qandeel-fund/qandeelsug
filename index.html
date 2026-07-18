@@ -3,106 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صندوق الاقتراحات - فريقنا</title>
-    <link rel="stylesheet" href="style.css">
+    <title>قنديل - صندوق الاقتراحات</title>
+    <!-- استدعاء خط Cairo المعتمد -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styleq.css">
 </head>
 <body>
 
-    <div class="main-container">
-        <header>
-            <div class="header-logo">
-                <!-- تأكدي أن اسم الصورة متطابق تماماً مع الملف المرفوع في جيت هوب -->
-                <img src="شفاف%20%20قنديل.png" alt="شعار قنديل" class="logo-img">
-            </div>
-            <h1>صنـدوق اقتراحـات قنديـل 🕯️</h1>
-            <p>رأيــكـــــــم يهمنــــــا لنـــرتــقــــــي مـعًـــــــا </p>
-        </header>
+<header>
+    <div class="container navbar">
+        <!-- الشعار في الأعلى ليكون بالوسط تماماً -->
+        <div class="nav-logo-row">
+            <a href="index.html#hero">
+                <img src="شفاف%20%20قنديل.png" alt="شعار مصياف قنديل" class="nav-logo">
+            </a>
+        </div>
 
-        <section class="form-section">
-            <form id="suggestionForm">
-                <div class="input-group">
-                    <label for="name">اسمك الكريم:</label>
-                    <input type="text" id="name" name="name" placeholder="مثال: حسنـاء" required>
-                </div>
+        <!-- روابط التنقل تحت الشعار مباشرة -->
+        <div class="nav-links-row">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" title="الرئيسية"> الرئيسيـة </a></li>
+                    <li><a href="index.html#stats">قنديل في أرقام</a></li>
+                    <li><a href="all.html">قنـاديــل مصيـاف</a></li>
+                </ul>
+            </nav>
+        </div>
 
-                <div class="input-group">
-                    <label for="suggestion">اقتراحك أو فكرتك المتميزة:</label>
-                    <textarea id="suggestion" name="suggestion" placeholder="اكتب اقتراحك هنا..." required></textarea>
-                </div>
-
-                <button type="submit" id="submitBtn">إرسـال الاقتـراح </button>
-            </form>
-
-            <div id="messageStatus" class="status-message"></div>
-        </section>
+        <!-- زر كن مضيئاً بحجم صغير وملموم في الأسفل -->
+        <div class="nav-bottom-row">
+            <a href="IBAN.html" class="nav-support-btn">
+               كُـــن مــضــيـئًـا <i class="fa-solid fa-hand-holding-heart"></i>
+            </a>
+        </div>
     </div>
+</header>
 
-    <!-- كود الجافا سكريبت الذكي للإرسال المباشر بدون بايثون -->
-    <!-- كود الجافا سكريبت المحدث والجاهز للتشغيل المباشر -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const suggestionForm = document.getElementById('suggestionForm');
+<!-- قسم العنوان الرئيسي لصفحة الاقتراحات -->
+<section class="hero-section" id="hero">
+    <div class="container hero-container">
+        <h1 class="welcome-title"><span class="brand-name">صندوق الاقتراحات</span></h1>
+        <div class="hero-intro-content">
+            <h2 class="hero-main-text">رأيكم يضيء مسيرتنا 🌱</h2>
+            <p class="hero-sub-text">يسعدنا استقبال آرائكم واقتراحاتكم لتطوير مصياف قنديل ونرتقي معاً.</p>
+        </div>
+    </div>
+</section>
 
-        if (suggestionForm) {
-            suggestionForm.addEventListener('submit', function(e) {
-                e.preventDefault(); 
+<!-- قسم نموذج الاقتراحات التفاعلي -->
+<section class="suggestions-section">
+    <div class="container suggestions-container">
+        <div class="suggestion-box">
+            <div class="section-title-box" style="text-align: center;">
+                <h2><i class="fa-solid fa-envelope-open-text"></i> أرسل اقتراحك</h2>
+                <p>شاركونا أفكاركم الإبداعية أو أي تحسينات تودون رؤيتها</p>
+            </div>
 
-                const nameInput = document.getElementById('name').value;
-                const suggestionInput = document.getElementById('suggestion').value;
-                const messageStatus = document.getElementById('messageStatus');
+            <form action="#" method="POST" class="suggestion-form">
+                <div class="form-group">
+                    <label for="user-name"><i class="fa-solid fa-user"></i> الاسم الكريـم (اختياري)</label>
+                    <input type="text" id="user-name" name="name" placeholder="أدخل اسمك هنا...">
+                </div>
 
-                messageStatus.textContent = "جاري إرسال اقتراحك المتميز .. ✨";
-                messageStatus.style.color = "#333";
-                messageStatus.style.display = "block";
+                <div class="form-group">
+                    <label for="user-email"><i class="fa-solid fa-envelope"></i> البريد الإلكتروني أو رقم التواصل (اختياري)</label>
+                    <input type="text" id="user-email" name="contact" placeholder="أدخل وسيلة التواصل...">
+                </div>
 
-                // 1️⃣ إرسال البيانات المباشر إلى تليجرام
-                const token = "8451586120:AAEEaShsVb1GvLeyVNsTJ77bYsipM6IBbkk";
-                const chatId = "1999709827";
-                const text = `📥 **وصلك اقتراح جديد من الجوال!**\n\n👤 **المرسل:** ${nameInput}\n💡 **المحتوى:**\n${suggestionInput}`;
+                <div class="form-group">
+                    <label for="suggestion-type"><i class="fa-solid fa-layer-group"></i> نوع الاقتراح / الملاحظة</label>
+                    <select id="suggestion-type" name="type" required>
+                        <option value="" disabled selected>اختر تصنيف الاقتراح...</option>
+                        <option value="activities">الأنشطة والبرامج</option>
+                        <option value="technical">تطوير الموقع والتقنية</option>
+                        <option value="management">التنظيم والإدارة</option>
+                        <option value="other">أفكار عامة أخرى</option>
+                    </select>
+                </div>
 
-                const telegramPromise = fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown' })
-                });
+                <div class="form-group">
+                    <label for="suggestion-content"><i class="fa-solid fa-pen-to-square"></i> تفاصيل الاقتراح</label>
+                    <textarea id="suggestion-content" name="message" rows="6" placeholder="اكتب اقتراحك بالتفصيل هنا، نحن بانتظارك..." required></textarea>
+                </div>
 
-                // 2️⃣ إرسال البيانات إلى جدول إكسل أونلاين الخاص بكِ عبر SheetMonkey
-                const sheetMonkeyURL = "https://api.sheetmonkey.io/form/7jgJLekCh26Qazdn34NjBs";
-                
-                const excelPromise = fetch(sheetMonkeyURL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        "التاريخ والوقت": new Date().toLocaleString('ar-EG'),
-                        "اسم المرسل": nameInput,
-                        "الاقتراح": suggestionInput
-                    })
-                });
+                <div class="motivation-btn-row" style="margin-top: 10px;">
+                    <button type="submit" class="btn-transfer-now" style="border: none; cursor: pointer;">إرسال الاقتراح <i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
-                // 3️⃣ التحقق من نجاح العمليتين معاً وتحديث الـ UI
-                Promise.all([telegramPromise, excelPromise])
-                .then(([teleRes, excelRes]) => {
-                    if (teleRes.ok) {
-                        messageStatus.textContent = "تم إرسال اقتراحك بنجاح ! 📥";
-                        messageStatus.style.color = "#2A5647"; 
-                        suggestionForm.reset(); 
-                    } else {
-                        throw new Error('فشل في الإرسال');
-                    }
-                })
-                .catch(error => {
-                    console.error('خطأ:', error);
-                    messageStatus.textContent = "عذراً، حدثت مشكلة أثناء الإرسال. ❌";
-                    messageStatus.style.color = "red";
-                });
-            });
-        }
-    });
-</script>
-
+<!-- الفوتر الموحد المعتم برقم 1b3a30 وبنفس أيقوناته -->
 <footer>
     <div class="container footer-container">
         <div class="footer-socials">
