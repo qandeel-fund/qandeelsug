@@ -215,3 +215,14 @@ button[type="submit"]:active {
     }
 }
 
+
+    .footer-socials {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+    .footer-icon-link.join-icon .icon-text {
+        font-size: 0.78rem;
+    }
+
