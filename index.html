@@ -60,25 +60,25 @@
 
         /* تنسيق العنوان الداخلي الجديد ليبقى ثابتاً داخل البوكس */
         .sug-page-header {
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 1px dashed #e3eae5;
+            text-align: center; 
+            margin-bottom: 25px; 
+            border-bottom: 1px dashed #e3eae5; 
             padding-bottom: 20px;
             display: block;
         }
 
         .sug-page-header h2 {
-            color: var(--sug-primary);
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin: 0 0 8px 0;
+            color: var(--sug-primary); 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            margin: 0 0 8px 0; 
             font-family: 'Cairo', sans-serif;
         }
 
         .sug-page-header p {
-            color: #666;
-            font-size: 0.9rem;
-            margin: 0;
+            color: #666; 
+            font-size: 0.9rem; 
+            margin: 0; 
             font-family: 'Cairo', sans-serif;
         }
 
@@ -118,7 +118,7 @@
             border-radius: 12px;
             font-size: 0.95rem;
             font-weight: 600;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif; 
             color: var(--sug-text);
             direction: rtl;
             outline: none;
@@ -136,12 +136,12 @@
         .sug-page-group textarea:focus {
             border-color: var(--sug-primary);
             background-color: var(--sug-white);
-            box-shadow: 0 0 0 4px rgba(42, 86, 71, 0.06); /* توهج خفيف بلون الهوية الأخضر */
+            box-shadow: 0 0 0 4px rgba(42, 86, 71, 0.06); 
         }
 
         .sug-page-group textarea {
             min-height: 140px;
-            resize: vertical; /* التوسيع عمودياً فقط */
+            resize: vertical; 
         }
 
         /* تنسيق زر الإرسال المتناسق مع أزرار الموقع الدائرية */
@@ -151,10 +151,10 @@
             color: var(--sug-white);
             padding: 15px 30px;
             border: none;
-            border-radius: 50px; /* زر دائري ورشيق متناسق مع أزرار الموقع */
+            border-radius: 50px; 
             font-size: 1.05rem;
             font-weight: 700;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif; 
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(42, 86, 71, 0.15);
             display: flex;
@@ -165,7 +165,7 @@
         }
 
         .sug-page-submit-btn:hover {
-            background-color: var(--sug-accent); /* يقلب ذهبي عند التحويم فخامة تامة */
+            background-color: var(--sug-accent); 
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(210, 179, 114, 0.25);
             color: var(--sug-white);
@@ -173,6 +173,21 @@
 
         .sug-page-submit-btn:active {
             transform: translateY(0);
+        }
+
+        /* تنسيق نص رسالة الحالة بدون أي مربع أو خلفية */
+        #messageStatus {
+            display: none; 
+            margin-top: 20px; 
+            font-size: 1rem; 
+            font-weight: 700; 
+            text-align: center; 
+            direction: rtl; 
+            font-family: 'Cairo', sans-serif;
+            border: none !important;
+            background: none !important;
+            padding: 0 !important;
+            box-shadow: none !important;
         }
 
         /* =======================================================
@@ -244,7 +259,7 @@
                 <!-- العنوان الداخلي المضمون بقاؤه داخل الكاونتر الأبيض -->
                 <div class="sug-page-header">
                     <h2>صنـدوق الاقتـراحـات 🕯️</h2>
-                    <p>شـــاركــونـــا أفـكــاركـــم</p>
+                    <p>شاركونا أفكاركم وتطلعاتكم لنرتقي بمبادرتنا معاً</p>
                 </div>
 
                 <form id="suggestionForm" class="sug-page-form">
@@ -263,7 +278,8 @@
                     </div>
                 </form>
 
-                <div id="messageStatus" style="display: none; margin-top: 20px; padding: 14px; border-radius: 12px; font-size: 1rem; font-weight: 700; text-align: center; direction: rtl; font-family: 'Cairo', sans-serif;"></div>
+                <!-- نص الرسالة هنا يظهر نقي وبدون أي خلفيات أو إطارات -->
+                <div id="messageStatus"></div>
             </div>
         </div>
     </section>
@@ -282,9 +298,7 @@
                     const messageStatus = document.getElementById('messageStatus');
 
                     messageStatus.textContent = "جاري إرسال اقتراحك المتميز .. ✨";
-                    messageStatus.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
-                    messageStatus.style.color = "#333";
-                    messageStatus.style.border = "1px solid #ccc";
+                    messageStatus.style.color = "#666666";
                     messageStatus.style.display = "block";
 
                     const token = "8451586120:AAEEaShsVb1GvLeyVNsTJ77bYsipM6IBbkk";
@@ -306,9 +320,7 @@
                     .then(response => {
                         if (response.ok) {
                             messageStatus.textContent = "تم إرسال اقتراحك بنجاح ! 📥";
-                            messageStatus.style.backgroundColor = "rgba(42, 86, 71, 0.1)";
-                            messageStatus.style.color = "#2A5647";
-                            messageStatus.style.border = "1px solid #2A5647";
+                            messageStatus.style.color = "#2A5647"; /* اللون الأخضر المعتمد للمبادرة */
                             suggestionForm.reset();
 
                             setTimeout(function() {
@@ -321,9 +333,7 @@
                     .catch(error => {
                         console.error('حدث خطأ أثناء الاتصال المباشر:', error);
                         messageStatus.textContent = "عذراً، حدثت مشكلة أثناء الإرسال. ❌";
-                        messageStatus.style.backgroundColor = "rgba(255, 0, 0, 0.05)";
-                        messageStatus.style.color = "red";
-                        messageStatus.style.border = "1px solid red";
+                        messageStatus.style.color = "#d9534f";
                     });
                 });
             }
