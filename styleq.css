@@ -1,0 +1,866 @@
+/* =======================================================
+   1. إعدادات المتغيرات والألوان بناءً على هوية قنديل
+   ======================================================= */
+:root {
+    --primary-color: #2A5647;   /* الأخضر الداكن المعتمد للهوية */
+    --accent-color: #D2B372;    /* الذهبي المعتمد (شعلة النور) */
+    --light-bg: #f4f7f5;        /* خلفية مريحة */
+    --white: #ffffff;
+    --text-color: #333333;
+    --transition: all 0.4s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden; /* يمنع أي ظهور لشريط التمرير العرضي المزعج في الآيفون */
+    padding-top: 195px !important; /* مسافة تعويضية علوية لضمان عدم اختفاء بداية الـ Hero تحت الهيدر المطور المكون من 3 أسطر */
+}
+
+.container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* =======================================================
+   2. الهيدر وشريط التنقل العلوي الثابت والمطور (Navbar)
+   ======================================================= */
+header {
+    background-color: var(--white);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0 10px 0;
+}
+
+/* حاوية الهيدر ترتب الأسطر الثلاثة عمودياً وتحاذيها في الوسط */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* توسيط كل شيء */
+    gap: 12px;
+    width: 100%;
+}
+
+/* السطر الأول: الشعار في المنتصف */
+.nav-logo-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-logo {
+    height: 55px; /* حجم مناسب للشعار */
+    width: auto;
+    object-fit: contain;
+}
+
+/* السطر الثاني: الروابط مجمعة في الوسط تحت الشعار */
+.nav-links-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.nav-links li a:hover {
+    color: var(--accent-color);
+}
+
+/* أيقونة المنزل */
+.home-icon {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    transition: var(--transition);
+    vertical-align: middle;
+}
+
+.home-icon:hover {
+    color: var(--accent-color);
+    transform: scale(1.15);
+}
+
+/* السطر الثالث: زر الدعم المصغر */
+.nav-bottom-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* تصميم الزر المصغر والمحكوم بأبعاد ثابتة */
+.nav-support-btn {
+    background-color: var(--accent-color);
+    color: var(--white) !important;
+    padding: 6px 25px; /* تقليل الحشو ليكون أصغر وأرشق */
+    max-width: 180px; /* تحديد عرض أقصى لكي لا يمتد ويصبح ضخماً */
+    width: auto; /* يلغي الامتداد التلقائي */
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem; /* خط أصغر وأرتب */
+    box-shadow: 0 4px 10px rgba(42, 86, 71, 0.12);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.nav-support-btn:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(42, 86, 71, 0.2);
+}
+
+/* =======================================================
+   3. قسم الترحيب الموحد (Hero Section) - فخامة متكاملة عمودية
+   ======================================================= */
+.hero-section {
+    background: var(--white);
+    padding: 60px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.hero-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* مسافة مريحة تفصل الترحيب الرئيسي عن بقية الأسطر */
+}
+
+/* جملة الترحيب الرئيسية */
+.welcome-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.welcome-title .brand-name {
+    color: var(--accent-color);
+}
+
+/* حاوية الأسطر العمودية الثلاثة */
+.hero-intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* مسافة متناسقة بين الأسطر الثلاثة تحت بعض */
+    width: 100%;
+}
+
+/* السطر الأول */
+.hero-main-text {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--accent-color);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* السطر الثاني */
+.hero-sub-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* السطر الثالث */
+.hero-vision-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555555;
+    max-width: 850px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 14px 35px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(42, 86, 71, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+/* =======================================================
+   4. لوحة التحكم الإحصائية (Dashboard Section)
+   ======================================================= */
+.dashboard-section {
+    padding: 40px 0;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 35% 62%;
+    gap: 3%;
+    align-items: start;
+}
+
+.section-title-box h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.section-title-box p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* بوكس الحصالة */
+.right-column-box {
+    background-color: var(--white);
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+    border-top: 5px solid var(--accent-color);
+    text-align: center;
+}
+
+.money-box-img-container {
+    margin: 20px 0;
+}
+
+.money-box-large-img {
+    max-width: 43%;
+    height: auto;
+    animation: pulse 2.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.04); }
+}
+
+/* =======================================================
+   5. بوكس العداد ودليل ألوان العوائل الجديد
+   ======================================================= */
+.progress-container-box {
+    background-color: var(--light-bg);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 15px;
+    text-align: right;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    direction: rtl;
+}
+
+.progress-bar-bg {
+    background-color: #e0e0e0;
+    height: 18px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    height: 100%;
+    transition: width 1.5s ease-in-out;
+}
+
+/* دليل ألوان العوائل الرأسي المنظم للآيفون */
+.families-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    direction: rtl;
+}
+
+.color-box {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.family-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.motivation-text {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* =======================================================
+   6. لوحة شرف النجوم والأرقام
+   ======================================================= */
+.left-column-stars {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+    border-top: 5px solid var(--primary-color);
+}
+
+.stars-categories-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.winner-card {
+    background: var(--light-bg);
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid #e3eae5;
+}
+
+.winner-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(42, 86, 71, 0.08);
+}
+
+.category-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.winner-avatar-box {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+    overflow: hidden;
+    margin: 15px 0 10px 0;
+    background-color: #ddd;
+}
+
+.winner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.winner-details h3 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+/* --- تنسيق النص التشجيعي أسفل لوحة النجوم --- */
+.stars-motivation-box {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    text-align: center;
+    border: 1px dashed var(--accent-color);
+}
+
+.stars-motivation-box p {
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.achievement-text {
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 600;
+}
+
+.section-title {
+    text-align: center;
+    margin: 50px 0 30px 0;
+}
+
+.section-title h2 {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-item {
+    background-color: var(--white);
+    padding: 35px 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    border-bottom: 4px solid var(--accent-color);
+}
+
+.stat-icon {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.counter {
+    font-size: 2.4rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.stat-item p {
+    font-weight: 700;
+    color: #666;
+}
+
+/* =======================================================
+   7. قسم من نحن والفوتر الرسمي المطور
+   ======================================================= */
+.about-section {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 60px 0;
+    border-radius: 20px 20px 0 0;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 55% 40%;
+    gap: 5%;
+    align-items: center;
+}
+
+.about-text h2 {
+    color: var(--accent-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.about-text p {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: right;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+.about-gallery-single {
+    width: 80%;
+    text-align: center;
+}
+
+.combined-gallery-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* =======================================================
+   10. تنسيقات صفحة الاقتراحات المستقلة (صندوق الاقتراحات)
+   ======================================================= */
+.suggestions-section {
+    padding: 60px 0 100px 0;
+    background-color: var(--light-bg);
+}
+
+.sug-page-container {
+    max-width: 600px; /* الحجم المحكوم والأنيق للصندوق كما طلبتِ */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.sug-page-box {
+    background-color: var(--white);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(42, 86, 71, 0.05); /* ظل ناعم بلمحة أخاذة من لون الهوية */
+    border-top: 6px solid var(--accent-color); /* الخط الذهبي الفخم في الأعلى تماماً */
+    transition: var(--transition);
+}
+
+.sug-page-form {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* مسافات متناسقة بين الحقول */
+}
+
+.sug-page-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: right;
+}
+
+.sug-page-group label {
+    display: block;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.sug-page-group label i {
+    color: var(--accent-color); /* الأيقونات بلون النور الذهبي المعتمد */
+    margin-left: 5px;
+}
+
+.sug-page-group input[type="text"],
+.sug-page-group select,
+.sug-page-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #e3eae5; /* لون حدود متناغم مع الخلفية الفاتحة والأخضر */
+    background-color: #fcfdfe;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-color);
+    direction: rtl;
+    outline: none;
+    transition: var(--transition);
+}
+
+.sug-page-group input[type="text"]::placeholder,
+.sug-page-group textarea::placeholder {
+    color: #aaaaaa;
+}
+
+/* تأثير التركيز عند الكتابة داخل الحقول */
+.sug-page-group input[type="text"]:focus,
+.sug-page-group select:focus,
+.sug-page-group textarea:focus {
+    border-color: var(--primary-color);
+    background-color: var(--white);
+    box-shadow: 0 0 0 4px rgba(42, 86, 71, 0.06); /* توهج خفيف بلون الهوية الأخضر */
+}
+
+.sug-page-group textarea {
+    min-height: 140px;
+    resize: vertical; /* التوسيع عمودياً فقط للمستخدم */
+}
+
+/* تنسيق زر الإرسال المتناسق مع أزرار الموقع */
+.sug-page-submit-btn {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px; /* زر دائري ورشيق متناسق مع أزرار الموقع */
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(42, 86, 71, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.sug-page-submit-btn:hover {
+    background-color: var(--accent-color); /* يقلب ذهبي عند التحويم فخامة تامة */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(210, 179, 114, 0.25);
+    color: var(--white);
+}
+
+.sug-page-submit-btn:active {
+    transform: translateY(0);
+}
+
+/* =======================================================
+   11. التجاوب الكامل والشاشات الصغيرة لجوالات الآيفون
+   ======================================================= */
+@media (max-width: 480px) {
+    .suggestions-section {
+        padding: 30px 0 60px 0;
+    }
+
+    .sug-page-box {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+
+    .sug-page-group label {
+        font-size: 0.9rem;
+    }
+
+    .sug-page-group input[type="text"],
+    .sug-page-group select,
+    .sug-page-group textarea {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+
+    .sug-page-submit-btn {
+        padding: 13px 25px;
+        font-size: 0.95rem;
+    }
+}
+
+footer {
+    background-color: #1b3a30;
+    color: var(--white);
+    padding: 25px 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-top: 3px solid var(--accent-color);
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.footer-socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-icon-link {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.footer-icon-link.join-icon {
+    font-size: 0.9rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 6px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 179, 114, 0.4);
+}
+
+.footer-icon-link:hover {
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.footer-icon-link.join-icon:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.footer-rights p {
+    opacity: 0.7;
+    font-size: 0.85rem;
+}
+
+/* =======================================================
+   8. شاشات العرض التفاعلية المتوسطة (Tablets)
+   ======================================================= */
+@media (max-width: 992px) {
+    .dashboard-grid { grid-template-columns: 1fr; gap: 30px; }
+    .stars-categories-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 30px; }
+    .about-gallery-single { width: 100%; }
+}
+
+/* =======================================================
+   9. شاشات الجوال المخصصة والآيفون والتجاوب الذكي للـ Hero
+   ======================================================= */
+@media (max-width: 440px) {
+    .hero-section {
+        padding-top: 10px !important; /* مسافة أمان مضافة بالتزامن مع البادنج الإجمالي للـ body */
+        padding-bottom: 25px;
+    }
+
+    .hero-container {
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    .welcome-title { font-size: 1.6rem; }
+    .hero-intro-content { gap: 15px; }
+    .hero-main-text { font-size: 1.25rem; }
+    .hero-sub-text { font-size: 1.05rem; }
+    .hero-vision-text { font-size: 0.9rem; line-height: 1.7; }
+}
+
+.stat-icon .quran-custom-icon {
+    width: 55px;         /* ارفعي القيمة هنا حتى يتناسق حجمها بالنظر مع الباقيين */
+    height: 60px;        /* تثبيت الارتفاع ليتطابق مع الـ font-size الخاص بالأيقونات */
+    object-fit: contain; /* يحافظ على أبعاد المصحف بدون تمطيط */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@media (max-width: 440px) {
+    body {
+        padding-top: 105px !important; /* مسافة تعويضية مطورة ومحكمة للآيفون لحماية الهيدر الممتد */
+    }
+
+    /* ضمان ثبات الهيدر العمودي في الجوال */
+    .navbar {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 12px !important;
+        padding: 0 !important;
+    }
+
+    .nav-logo {
+        height: 48px !important; /* تصغير طفيف وموحد للشعار في الجوال */
+        margin-bottom: 2px !important;
+    }
+
+    nav {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    nav ul {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 15px !important; /* مسافة مريحة للروابط */
+        width: 100% !important;
+    }
+
+    nav ul li {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    nav ul li a {
+        font-size: 0.88rem !important;
+        white-space: nowrap !important;
+    }
+
+    .nav-support-btn {
+        max-width: 160px !important; /* أبعاد محكومة للزر على الآيفون */
+        padding: 5px 20px !important;
+        font-size: 0.88rem !important;
+        width: 100% !important;
+        justify-content: center;
+    }
+
+    /* ضبط أبعاد كتل العناصر المتنوعة للجوال */
+    .section-title-box h2 { font-size: 1.3rem; text-align: center; }
+    .section-title-box p { font-size: 0.85rem; text-align: center; }
+    .money-box-large-img { max-width: 55%; }
+    .right-column-box, .left-column-stars { padding: 20px 12px; }
+    .about-text h2 { font-size: 1.4rem; text-align: center; }
+    .about-text p { font-size: 0.88rem; text-align: justify; }
+
+    .stars-motivation-box {
+        margin-top: 18px;
+        padding: 12px 10px;
+    }
+    .stars-motivation-box p {
+        font-size: 0.82rem;
+    }
+
+    .footer-socials {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+    .footer-icon-link.join-icon .icon-text {
+        font-size: 0.78rem;
+    }
+}

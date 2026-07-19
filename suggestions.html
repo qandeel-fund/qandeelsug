@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صندوق الاقتراحات - فريقنا</title>
+
+    <!-- ربط ملف التنسيق الرئيسي لجلب الـ Navbar والـ Footer والمظهر العام -->
+    <link rel="stylesheet" href="styleq.css">
+
+    <!-- استدعاء خط Cairo المعتمد للموقع ليتطابق تماماً مع "مشاركين مصياف" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- مكتبة الأيقونات Font Awesome لدعم مظهر الحقول -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- تنسيقات صندوق الاقتراحات المستقلة المتوافقة مع خط Cairo -->
+    <style>
+        :root {
+            --sug-primary: #2A5647;   /* اللون الأخضر لقنديل */
+            --sug-accent: #D2B372;    /* اللون الذهبي الفخم */
+            --sug-bg: #F9FBF9;        /* خلفية مريحة لقسم الاقتراحات */
+            --sug-white: #ffffff;
+            --sug-text: #333333;
+        }
+
+        /* تطبيق خط Cairo على الصفحة بالكامل لتوحيد مظهر الناف بار والفوتر */
+        body, header, footer, nav, ul, li, a {
+            font-family: 'Cairo', sans-serif !important;
+        }
+
+        .suggestions-section {
+            padding: 60px 0 100px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--sug-bg);
+            min-height: 70vh;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .sug-page-container {
+            width: 100%;
+            max-width: 600px; /* الحجم المحكوم والأنيق للصندوق */
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .sug-page-box {
+            background-color: var(--sug-white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(42, 86, 71, 0.05); /* ظل ناعم بلمحة أخاذة من لون الهوية */
+            border-top: 6px solid var(--sug-accent); /* الخط الذهبي الفخم في الأعلى تماماً */
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* تنسيق العنوان الداخلي الجديد ليبقى ثابتاً داخل البوكس */
+        .sug-page-header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 1px dashed #e3eae5;
+            padding-bottom: 20px;
+            display: block;
+        }
+
+        .sug-page-header h2 {
+            color: var(--sug-primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .sug-page-header p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .sug-page-form {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* مسافات متناسقة بين الحقول */
+        }
+
+        .sug-page-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: right;
+        }
+
+        .sug-page-group label {
+            display: block;
+            color: var(--sug-primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .sug-page-group label i {
+            color: var(--sug-accent); /* الأيقونات بلون النور الذهبي المعتمد */
+            margin-left: 5px;
+        }
+
+        .sug-page-group input[type="text"],
+        .sug-page-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #e3eae5; /* لون حدود متناغم مع الخلفية الفاتحة والأخضر */
+            background-color: #fcfdfe;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            color: var(--sug-text);
+            direction: rtl;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .sug-page-group input[type="text"]::placeholder,
+        .sug-page-group textarea::placeholder {
+            color: #aaaaaa;
+        }
+
+        /* تأثير التركيز عند الكتابة داخل الحقول */
+        .sug-page-group input[type="text"]:focus,
+        .sug-page-group textarea:focus {
+            border-color: var(--sug-primary);
+            background-color: var(--sug-white);
+            box-shadow: 0 0 0 4px rgba(42, 86, 71, 0.06); /* توهج خفيف بلون الهوية الأخضر */
+        }
+
+        .sug-page-group textarea {
+            min-height: 140px;
+            resize: vertical; /* التوسيع عمودياً فقط */
+        }
+
+        /* تنسيق زر الإرسال المتناسق مع أزرار الموقع الدائرية */
+        .sug-page-submit-btn {
+            width: 100%;
+            background-color: var(--sug-primary);
+            color: var(--sug-white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px; /* زر دائري ورشيق متناسق مع أزرار الموقع */
+            font-size: 1.05rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(42, 86, 71, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sug-page-submit-btn:hover {
+            background-color: var(--sug-accent); /* يقلب ذهبي عند التحويم فخامة تامة */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(210, 179, 114, 0.25);
+            color: var(--sug-white);
+        }
+
+        .sug-page-submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* =======================================================
+           التجاوب الكامل لشاشات الجوال والآيفون
+           ======================================================= */
+        @media (max-width: 480px) {
+            .suggestions-section {
+                padding: 30px 0 60px 0;
+            }
+
+            .sug-page-box {
+                padding: 30px 20px;
+                border-radius: 15px;
+            }
+
+            .sug-page-group label {
+                font-size: 0.9rem;
+            }
+
+            .sug-page-group input[type="text"],
+            .sug-page-group textarea {
+                padding: 12px 14px;
+                font-size: 0.9rem;
+            }
+
+            .sug-page-submit-btn {
+                padding: 13px 25px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container navbar">
+        <!-- الشعار في الأعلى ليكون بالوسط تماماً -->
+        <div class="nav-logo-row">
+            <a href="index.html#hero">
+                <img src="شفاف%20%20قنديل.png" alt="شعار مصياف قنديل" class="nav-logo">
+            </a>
+        </div>
+
+        <!-- روابط التنقل تحت الشعار مباشرة -->
+        <div class="nav-links-row">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" title="الرئيسية"> الرئيسيـة </a></li>
+                    <li><a href="index.html#stats">قنديل في أرقام</a></li>
+                    <li><a href="all.html">قنـاديــل مصيـاف</a></li>
+                    <li><a href="suggestions.html">إقتـراحاتـكم</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- 3. زر كن مضيئاً بحجم صغير وملموم في الأسفل -->
+        <div class="nav-bottom-row">
+            <a href="IBAN.html" target="_blank" class="nav-support-btn">
+                كُـــن مــضــيـئًـا <i class="fa-solid fa-hand-holding-heart"></i>
+            </a>
+        </div>
+
+    </div>
+</header>
+    <!-- 2. محتوى صندوق الاقتراحات المحمي -->
+    <section class="suggestions-section">
+        <div class="sug-page-container">
+            <div class="sug-page-box">
+
+                <!-- العنوان الداخلي المضمون بقاؤه داخل الكاونتر الأبيض -->
+                <div class="sug-page-header">
+                    <h2>صنـدوق الاقتـراحـات 🕯️</h2>
+                    <p>شـــاركــونـــا أفـكــاركـــم</p>
+                </div>
+
+                <form id="suggestionForm" class="sug-page-form">
+                    <div class="sug-page-group">
+                        <label for="name"><i class="fa-solid fa-user"></i> اسمك الكريم:</label>
+                        <input type="text" id="name" name="name" placeholder="مثال: حسنـاء" required>
+                    </div>
+
+                    <div class="sug-page-group">
+                        <label for="suggestion"><i class="fa-solid fa-pen-to-square"></i> اقتراحك أو فكرتك المتميزة:</label>
+                        <textarea id="suggestion" name="suggestion" placeholder="اكتب اقتراحك هنا..." required></textarea>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <button type="submit" id="submitBtn" class="sug-page-submit-btn">إرسـال الاقتـراح ✨</button>
+                    </div>
+                </form>
+
+                <div id="messageStatus" style="display: none; margin-top: 20px; padding: 14px; border-radius: 12px; font-size: 1rem; font-weight: 700; text-align: center; direction: rtl; font-family: 'Cairo', sans-serif;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- كود الجافا سكريبت الذكي الخاص بالإرسال المباشر -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const suggestionForm = document.getElementById('suggestionForm');
+
+            if (suggestionForm) {
+                suggestionForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const nameInput = document.getElementById('name').value;
+                    const suggestionInput = document.getElementById('suggestion').value;
+                    const messageStatus = document.getElementById('messageStatus');
+
+                    messageStatus.textContent = "جاري إرسال اقتراحك المتميز .. ✨";
+                    messageStatus.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
+                    messageStatus.style.color = "#333";
+                    messageStatus.style.border = "1px solid #ccc";
+                    messageStatus.style.display = "block";
+
+                    const token = "8451586120:AAEEaShsVb1GvLeyVNsTJ77bYsipM6IBbkk";
+                    const chatId = "1999709827";
+
+                    const text = `📥 **وصلك اقتراح جديد من الجوال!**\n\n👤 **المرسل:** ${nameInput}\n💡 **المحتوى:**\n${suggestionInput}`;
+
+                    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: text,
+                            parse_mode: 'Markdown'
+                        })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            messageStatus.textContent = "تم إرسال اقتراحك بنجاح ! 📥";
+                            messageStatus.style.backgroundColor = "rgba(42, 86, 71, 0.1)";
+                            messageStatus.style.color = "#2A5647";
+                            messageStatus.style.border = "1px solid #2A5647";
+                            suggestionForm.reset();
+
+                            setTimeout(function() {
+                                messageStatus.style.display = "none";
+                            }, 5000);
+                        } else {
+                            throw new Error('فشل في استجابة السيرفر');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('حدث خطأ أثناء الاتصال المباشر:', error);
+                        messageStatus.textContent = "عذراً، حدثت مشكلة أثناء الإرسال. ❌";
+                        messageStatus.style.backgroundColor = "rgba(255, 0, 0, 0.05)";
+                        messageStatus.style.color = "red";
+                        messageStatus.style.border = "1px solid red";
+                    });
+                });
+            }
+        });
+    </script>
+
+<footer>
+    <div class="container footer-container">
+        <div class="footer-socials">
+            <a href="https://wa.me/966579517751" target="_blank" title="واتساب المبادرة" class="footer-icon-link">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/qandeel_fund" target="_blank" title="انستقرام المبادرة" class="footer-icon-link">
+             <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://chat.whatsapp.com/KPNoigsbJTEI9pqOmeyUr5?mode=gi_t" target="_blank" title="القروب العام" class="footer-icon-link join-icon">
+                <i class="fa-solid fa-user-plus"></i> <span class="icon-text">انضم للقروب العام</span>
+            </a>
+        </div>
+
+        <div class="footer-rights">
+            <p>جميع الحقوق محفوظة لقنـديل © 2026</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
