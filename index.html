@@ -307,10 +307,10 @@
                     const telegramChatId = "1999709827";
                     const telegramText = `📥 **وصلك اقتراح جديد من الموقع!**\n\n👤 **المرسل:** ${nameInput}\n💡 **المحتوى:**\n${suggestionInput}`;
 
-                    // 2. رابط الـ SheetMonkey الخاص بكِ للإكسل
+                    // 2. رابط SheetMonkey للإكسل
                     const sheetMonkeyUrl = "https://api.sheetmonkey.io/form/7jgJLekCh26Qazdn34NjBs"; 
 
-                    // استخدام Promise.all لإرسال الطلبين (تليجرام + إكسل) في نفس الوقت بالتوازي
+                    // استخدام Promise.all لإرسال الطلبين (تليجرام + إكسل) بالتوازي
                     Promise.all([
                         // أولاً: طلب التليجرام
                         fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
@@ -322,14 +322,14 @@
                                 parse_mode: 'Markdown'
                             })
                         }),
-                        // ثانياً: طلب الـ SheetMonkey
+                        // ثانياً: طلب الـ SheetMonkey بالترتيب والمفاتيح العربية المطلوبة
                         fetch(sheetMonkeyUrl, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
-                                name: nameInput,
-                                suggestion: suggestionInput,
-                                createdWithError: new Date().toLocaleString('ar-EG')
+                                "التاريخ والوقت": new Date().toLocaleString('ar-EG', { hour12: true }),
+                                "الاسم": nameInput,
+                                "الاقتراح": suggestionInput
                             })
                         })
                     ])
