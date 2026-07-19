@@ -251,7 +251,8 @@
 
     </div>
 </header>
-    <!-- 2. محتوى صندوق الاقتراحات المحمي -->
+
+    <!-- محتوى صندوق الاقتراحات المحمي -->
     <section class="suggestions-section">
         <div class="sug-page-container">
             <div class="sug-page-box">
@@ -278,13 +279,13 @@
                     </div>
                 </form>
 
-                <!-- نص الرسالة هنا يظهر نقي وبدون أي خلفيات أو إطارات -->
+                <!-- نص الرسالة النقي بدون إطارات أو خلفيات -->
                 <div id="messageStatus"></div>
             </div>
         </div>
     </section>
 
-    <!-- كود الجافا سكريبت الذكي الخاص بالإرسال المباشر -->
+    <!-- كود الجافا سكريبت الذكي الخاص بالإرسال المباشر (التليجرام + SheetMonkey معاً) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const suggestionForm = document.getElementById('suggestionForm');
@@ -301,37 +302,49 @@
                     messageStatus.style.color = "#666666";
                     messageStatus.style.display = "block";
 
-                    const token = "8451586120:AAEEaShsVb1GvLeyVNsTJ77bYsipM6IBbkk";
-                    const chatId = "1999709827";
+                    // 1. إعدادات تليجرام
+                    const telegramToken = "8451586120:AAEEaShsVb1GvLeyVNsTJ77bYsipM6IBbkk";
+                    const telegramChatId = "1999709827";
+                    const telegramText = `📥 **وصلك اقتراح جديد من الموقع!**\n\n👤 **المرسل:** ${nameInput}\n💡 **المحتوى:**\n${suggestionInput}`;
 
-                    const text = `📥 **وصلك اقتراح جديد من الجوال!**\n\n👤 **المرسل:** ${nameInput}\n💡 **المحتوى:**\n${suggestionInput}`;
+                    // 2. رابط الـ SheetMonkey الخاص بكِ للإكسل
+                    const sheetMonkeyUrl = "https://api.sheetmonkey.io/form/7jgJLekCh26Qazdn34NjBs"; 
 
-                    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            chat_id: chatId,
-                            text: text,
-                            parse_mode: 'Markdown'
+                    // استخدام Promise.all لإرسال الطلبين (تليجرام + إكسل) في نفس الوقت بالتوازي
+                    Promise.all([
+                        // أولاً: طلب التليجرام
+                        fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                chat_id: telegramChatId,
+                                text: telegramText,
+                                parse_mode: 'Markdown'
+                            })
+                        }),
+                        // ثانياً: طلب الـ SheetMonkey
+                        fetch(sheetMonkeyUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                name: nameInput,
+                                suggestion: suggestionInput,
+                                createdWithError: new Date().toLocaleString('ar-EG')
+                            })
                         })
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            messageStatus.textContent = "تم إرسال اقتراحك بنجاح ! 📥";
-                            messageStatus.style.color = "#2A5647"; /* اللون الأخضر المعتمد للمبادرة */
-                            suggestionForm.reset();
+                    ])
+                    .then(() => {
+                        // إظهار رسالة النجاح الأنيقة عند اكتمال العمليتين
+                        messageStatus.textContent = "تم إرسال اقتراحك بنجاح وحفظه ! 📥";
+                        messageStatus.style.color = "#2A5647"; 
+                        suggestionForm.reset();
 
-                            setTimeout(function() {
-                                messageStatus.style.display = "none";
-                            }, 5000);
-                        } else {
-                            throw new Error('فشل في استجابة السيرفر');
-                        }
+                        setTimeout(function() {
+                            messageStatus.style.display = "none";
+                        }, 5000);
                     })
                     .catch(error => {
-                        console.error('حدث خطأ أثناء الاتصال المباشر:', error);
+                        console.error('حدث خطأ أثناء الإرسال:', error);
                         messageStatus.textContent = "عذراً، حدثت مشكلة أثناء الإرسال. ❌";
                         messageStatus.style.color = "#d9534f";
                     });
